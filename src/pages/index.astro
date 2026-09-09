@@ -1,0 +1,324 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+
+import charCoffee from '../assets/char_coffee.png';
+import charWave from '../assets/char_wave.png';
+---
+
+<Layout title="Menú de Mimo — Mimo Estudio & Barra">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-cup" viewBox="0 0 48 48">
+      <path
+        d="M9 33 L11 17 H31 L33 33 Q22 40 9 33Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.6"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M31 20c6-2 9 1 8 6s-6 6-10 5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.6"
+        stroke-linecap="round"
+      />
+      <path
+        d="M17 6c-2 2-2 4 0 6M23 6c-2 2-2 4 0 6M29 6c-2 2-2 4 0 6"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+      />
+    </symbol>
+    <symbol id="i-glass" viewBox="0 0 48 48">
+      <path
+        d="M14 10h20l-3 30a3 3 0 01-3 3H20a3 3 0 01-3-3L14 10Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.6"
+        stroke-linejoin="round"
+      />
+      <path d="M14.8 18h18.4" stroke="currentColor" stroke-width="2.2" />
+      <path d="M27 4l3 8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-plate" viewBox="0 0 48 48">
+      <circle cx="24" cy="26" r="14" fill="none" stroke="currentColor" stroke-width="2.6" />
+      <circle cx="24" cy="26" r="7" fill="none" stroke="currentColor" stroke-width="1.8" />
+      <path d="M8 8v9M12 8v9M8 12h4M10 17v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M40 8v18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-drop" viewBox="0 0 48 48">
+      <path
+        d="M24 4C24 4 12 20 12 29a12 12 0 0024 0C36 20 24 4 24 4Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.6"
+        stroke-linejoin="round"
+      />
+      <path d="M18 30c0 3 2.5 5 6 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-facebook" viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="19" fill="none" stroke="currentColor" stroke-width="2.6" />
+      <path
+        d="M28 16h-3.5c-1.7 0-3 1.3-3 3v4h-3.5v4.5H21.5V38h4.5V27.5h3.3l.7-4.5h-4V17c0-.6.4-1 1-1H28v-4Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linejoin="round"
+      />
+    </symbol>
+    <symbol id="i-instagram" viewBox="0 0 48 48">
+      <rect x="6" y="6" width="36" height="36" rx="11" fill="none" stroke="currentColor" stroke-width="2.6" />
+      <circle cx="24" cy="24" r="8.5" fill="none" stroke="currentColor" stroke-width="2.6" />
+      <circle cx="33.5" cy="14.5" r="1.8" fill="currentColor" />
+    </symbol>
+  </svg>
+
+  <header>
+    <div class="wrap headbar">
+      <img class="logo-img" src={`${import.meta.env.BASE_URL}mimo-logo-blanco.png`} alt="Mimo Estudio & Barra" />
+      <nav>
+        <a href="#menu">Menú</a>
+        <a href="#quien-es">Quién es Mimo</a>
+        <a href="#visitanos">Visítanos</a>
+        <a class="nav-cta" href="#menu">Ver menú</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="hero">
+        <div class="hero-copy">
+          <h1>Un ratito<br />para ti,<br />consiéntete y <em>mímate</em>.</h1>
+          <p class="lede">
+            Entre clase y clase, te esperamos en nuestra barra.<br />
+            Café, bebidas frías y snacks disponibles para ti.
+          </p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#menu">Ver el menú ☕</a>
+            <a class="btn btn-ghost" href="#quien-es">Conoce a Mimo</a>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="blob"></div>
+          <Image class="illus" src={charCoffee} alt="Ilustración de Mimo tomando un café calientito" width={700} />
+        </div>
+      </section>
+    </div>
+
+    <section id="menu">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <h2>Nuestro menú</h2>
+          <p>
+            Todo pensado para antes o después de tu clase: bebidas calientes, algo frío, snacks
+            que rinden y extras de bienestar.
+          </p>
+        </div>
+
+        <div class="category" data-reveal>
+          <div class="category-head">
+            <svg class="icon"><use href="#i-cup" /></svg>
+            <h3>Calientitos</h3>
+            <div class="rule"></div>
+          </div>
+          <div class="card-grid">
+            <div class="item-card">
+              <div class="item-top"><span class="item-name">Espresso Mimo</span><span class="item-price">$35</span></div>
+              <p class="item-desc">Doble shot, tostado suave. Rápido y directo al punto.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-top"><span class="item-name">Capuchino clásico</span><span class="item-price">$45</span></div>
+              <p class="item-desc">Espuma tupida y un toque de canela si tú quieres.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-top"><span class="item-name">Latte de vainilla</span><span class="item-price">$48</span></div>
+              <p class="item-desc">Leche de tu elección, vainilla natural, muy suave.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-top"><span class="item-name">Matcha latte</span><span class="item-price">$55</span></div>
+              <p class="item-desc">Matcha ceremonial batida a mano, poco dulce.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="category" data-reveal>
+          <div class="category-head">
+            <svg class="icon"><use href="#i-glass" /></svg>
+            <h3>Fríos &amp; batidos</h3>
+            <div class="rule"></div>
+          </div>
+          <div class="card-grid">
+            <div class="item-card">
+              <div class="item-top"><span class="item-name">Cold brew</span><span class="item-price">$48</span></div>
+              <p class="item-desc">12 horas de reposo en frío. Suave y con cuerpo.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-top"><span class="item-name">Limonada de romero</span><span class="item-price">$42</span></div>
+              <p class="item-desc">Refrescante, poco dulce, con un toque de hierbas.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-top"><span class="item-name">Smoothie verde detox</span><span class="item-price">$65</span></div>
+              <p class="item-desc">Espinaca, piña, jengibre y un toque de menta.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-top"><span class="item-name">Batido proteico</span><span class="item-price">$70</span></div>
+              <p class="item-desc">Plátano, mantequilla de maní y whey de vainilla.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="category" data-reveal>
+          <div class="category-head">
+            <svg class="icon"><use href="#i-plate" /></svg>
+            <h3>Para picar</h3>
+            <div class="rule"></div>
+          </div>
+          <div class="card-grid">
+            <div class="item-card">
+              <div class="item-top"><span class="item-name">Toast de aguacate</span><span class="item-price">$68</span></div>
+              <p class="item-desc">Pan integral, aguacate, chile de árbol y limón.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-top"><span class="item-name">Avena overnight</span><span class="item-price">$60</span></div>
+              <p class="item-desc">Avena, leche de coco y frutos rojos de temporada.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-top"><span class="item-name">Energy balls</span><span class="item-price">$40</span></div>
+              <p class="item-desc">Dátil, avena y cacao. Vienen 3 piezas.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-top"><span class="item-name">Yogurt griego &amp; granola</span><span class="item-price">$55</span></div>
+              <p class="item-desc">Granola casera tostada y miel de abeja.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="category" data-reveal>
+          <div class="category-head">
+            <svg class="icon"><use href="#i-drop" /></svg>
+            <h3>Extras de bienestar</h3>
+            <div class="rule"></div>
+          </div>
+          <div class="card-grid">
+            <div class="item-card">
+              <div class="item-top"><span class="item-name">Shot jengibre &amp; cúrcuma</span><span class="item-price">$30</span></div>
+              <p class="item-desc">Un empujoncito antiinflamatorio, directo.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-top"><span class="item-name">Colágeno hidrolizado</span><span class="item-price">+$15</span></div>
+              <p class="item-desc">Añádelo a cualquier bebida caliente o fría.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-top"><span class="item-name">Proteína extra</span><span class="item-price">+$20</span></div>
+              <p class="item-desc">Scoop extra en tu batido o smoothie favorito.</p>
+            </div>
+            <div class="item-card">
+              <div class="item-top"><span class="item-name">Agua mineral</span><span class="item-price">$25</span></div>
+              <p class="item-desc">Con o sin gas, bien fría.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="quien-es">
+      <div class="wrap">
+        <div class="quien" data-reveal>
+          <div class="quien-art">
+            <Image class="illus" src={charWave} alt="Ilustración de Mimo saludando" width={700} />
+          </div>
+          <div class="quien-copy">
+            <h2>¿Quién es Mimo?</h2>
+            <p>
+              Mimo es cálida, cercana y motivadora, la amiga que te invita a mimarte. Le encanta
+              acompañarte en cada gesto: estirar, respirar, moverte y también sentarte un ratito
+              a mimarte. Su mundo es el ejercicio, el café, la comunidad y el autocuidado.
+            </p>
+            <div class="tag-row">
+              <span class="tag">🧘 ejercicio</span>
+              <span class="tag">☕ café</span>
+              <span class="tag">🤍 comunidad</span>
+              <span class="tag">🌿 autocuidado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="visitanos">
+    <div class="wrap">
+      <div>
+        <h4>Visítanos</h4>
+        <p>
+          <a class="map-link" href="https://maps.app.goo.gl/1QsWzESnLf1ouyam9" target="_blank" rel="noopener">
+            Torreón - San Pedro 8500 Interior 6<br />
+            Calle Carretera a San Pedro 8500<br />
+            La Conchita Roja, Ejido Ampliación Allende<br />
+            27426 Torreón, Coah.
+          </a>
+        </p>
+      </div>
+      <div>
+        <h4>Horario</h4>
+        <ul>
+          <li>Lun – Vie · 7:00 – 20:00</li>
+          <li>Sábado · 8:00 – 14:00</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Síguenos</h4>
+        <div class="social-row">
+          <a
+            class="social-link"
+            href="http://facebook.com/mimoestudio.mx"
+            target="_blank"
+            rel="noopener"
+            aria-label="Facebook de Mimo Estudio & Barra"
+          >
+            <svg class="icon"><use href="#i-facebook" /></svg>
+          </a>
+          <a
+            class="social-link"
+            href="https://instagram.com/mimoestudio.mx"
+            target="_blank"
+            rel="noopener"
+            aria-label="Instagram de Mimo Estudio & Barra"
+          >
+            <svg class="icon"><use href="#i-instagram" /></svg>
+          </a>
+        </div>
+        <ul>
+          <li><a href="mailto:myrnavelazquez@mimoestudio.mx">myrnavelazquez@mimoestudio.mx</a></li>
+          <li><a href="mailto:alebourguet@mimoestudio.mx">alebourguet@mimoestudio.mx</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap foot-bottom">
+      <img src={`${import.meta.env.BASE_URL}m-logo-blanoc.png`} alt="" class="foot-mark" />
+      <span>© 2026 Mimo Estudio &amp; Barra</span>
+    </div>
+  </footer>
+
+  <script>
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const els = document.querySelectorAll('[data-reveal]');
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      els.forEach((el) => io.observe(el));
+    }
+  </script>
+</Layout>
