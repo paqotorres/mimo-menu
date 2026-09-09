@@ -8,6 +8,24 @@ import charWave from '../assets/char_wave.png';
 
 <Layout title="Menú de Mimo — Mimo Estudio & Barra">
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-moon" viewBox="0 0 24 24">
+      <path
+        d="M20 14.5A8.5 8.5 0 1 1 9.5 4 6.5 6.5 0 0 0 20 14.5Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linejoin="round"
+      />
+    </symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8" />
+      <path
+        d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+      />
+    </symbol>
     <symbol id="i-cup" viewBox="0 0 48 48">
       <path
         d="M9 33 L11 17 H31 L33 33 Q22 40 9 33Z"
@@ -83,6 +101,10 @@ import charWave from '../assets/char_wave.png';
         <a href="#quien-es">Quién es Mimo</a>
         <a href="#visitanos">Visítanos</a>
         <a class="nav-cta" href="#menu">Ver menú</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar entre modo claro y oscuro">
+          <svg class="icon-moon"><use href="#i-moon" /></svg>
+          <svg class="icon-sun"><use href="#i-sun" /></svg>
+        </button>
       </nav>
     </div>
   </header>
@@ -320,5 +342,37 @@ import charWave from '../assets/char_wave.png';
       );
       els.forEach((el) => io.observe(el));
     }
+  </script>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = 'mimo-theme';
+      const btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+
+      function systemPrefersDark() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+      function effectiveTheme() {
+        let saved = null;
+        try {
+          saved = localStorage.getItem(STORAGE_KEY);
+        } catch (e) {}
+        if (saved === 'light' || saved === 'dark') return saved;
+        return systemPrefersDark() ? 'dark' : 'light';
+      }
+
+      // keep the icon in sync with the theme actually applied right now
+      btn.setAttribute('data-current', effectiveTheme());
+
+      btn.addEventListener('click', function () {
+        const next = effectiveTheme() === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        try {
+          localStorage.setItem(STORAGE_KEY, next);
+        } catch (e) {}
+        btn.setAttribute('data-current', next);
+      });
+    })();
   </script>
 </Layout>

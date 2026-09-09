@@ -24,7 +24,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --paper: #1D2016;
     --paper-deep: #151710;
     --card: #282C1D;
@@ -40,6 +40,24 @@
     --on-accent: #20230F;
     --tape: rgba(139, 146, 96, .45);
   }
+}
+
+/* explicit toggle wins over system preference in both directions */
+:root[data-theme="dark"] {
+  --paper: #1D2016;
+  --paper-deep: #151710;
+  --card: #282C1D;
+  --ink: #EFEEDC;
+  --ink-soft: #B7BB9C;
+  --accent: #C7CD93;
+  --accent-mid: #8B9260;
+  --accent-strong: #EAEDC9;
+  --line: rgba(239, 238, 220, .18);
+  --shadow: rgba(0, 0, 0, .5);
+  --illus-filter: invert(0.94) hue-rotate(10deg);
+  --mark-filter: none;
+  --on-accent: #20230F;
+  --tape: rgba(139, 146, 96, .45);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -81,6 +99,19 @@ nav a:hover, nav a:focus-visible { color: var(--accent-strong); border-color: va
   font-family: 'Kalam', cursive; font-weight: 700; font-size: 1rem; white-space: nowrap;
 }
 .nav-cta:hover { background: var(--accent-strong); }
+
+.theme-toggle {
+  display: flex; align-items: center; justify-content: center; width: 38px; height: 38px;
+  border: 1.5px solid var(--accent-mid); border-radius: 100px; color: var(--ink-soft);
+  background: transparent; cursor: pointer; flex: none;
+  transition: color .2s, border-color .2s, background .2s;
+}
+.theme-toggle:hover, .theme-toggle:focus-visible { color: var(--accent-strong); border-color: var(--accent-strong); }
+.theme-toggle svg { width: 19px; height: 19px; }
+/* JS sets data-current on the button once it knows the effective theme; default to showing the moon */
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle[data-current="dark"] .icon-sun { display: block; }
+.theme-toggle[data-current="dark"] .icon-moon { display: none; }
 
 /* ---------- wave divider ---------- */
 .wave-divider { width: 100%; display: flex; justify-content: center; margin: 6px 0; }

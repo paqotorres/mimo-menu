@@ -15,6 +15,19 @@ const {
 <!doctype html>
 <html lang="es">
   <head>
+    <script is:inline>
+      // Applies a previously chosen theme before first paint, to avoid a flash of
+      // the wrong theme. When nothing is saved yet, this does nothing on purpose —
+      // the CSS `prefers-color-scheme` query is what drives the initial look then.
+      (function () {
+        try {
+          var saved = localStorage.getItem('mimo-theme');
+          if (saved === 'light' || saved === 'dark') {
+            document.documentElement.setAttribute('data-theme', saved);
+          }
+        } catch (e) {}
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
