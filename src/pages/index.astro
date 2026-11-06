@@ -661,6 +661,21 @@ import Layout from '../layouts/Layout.astro';
       show('step-1');
     });
 
+    // Log the registration as a row in a Google Sheet. Fire-and-forget: uses
+    // no-cors + text/plain to dodge a CORS preflight against Apps Script, so
+    // the response isn't readable, but Apps Script still appends the row.
+    const SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzF2uCibQpN5_XKZv1jlJXve4jlmFSG23vwnstO0sceJPav7uCNCWlkYaPV7254Vo_D/exec';
+    function notifyBySheet(nombre: string, telefono: string, dia: string, hora: string) {
+      try {
+        fetch(SHEET_WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ nombre, telefono, dia, hora }),
+        }).catch(() => {});
+      } catch (e) {}
+    }
+
     // Best-effort silent copy to the business inboxes. Never blocks or fails the
     // flow for the visitor — WhatsApp (below) is the reliable channel.
     function notifyByEmail(nombre: string, telefono: string, horarioTexto: string) {
@@ -702,7 +717,10 @@ import Layout from '../layouts/Layout.astro';
         `Nombre: ${nombre}\nCelular: ${telefono}\nHorario: ${horarioTexto}`;
       window.open(`https://wa.me/528714086618?text=${encodeURIComponent(waText)}`, '_blank');
 
-      // 2) Best-effort bonus copy by email, fire-and-forget.
+      // 2) Log the registration in the Google Sheet, fire-and-forget.
+      notifyBySheet(nombre, telefono, selectedSlot.dayLabel, formatHour(selectedSlot.hour));
+
+      // 3) Best-effort bonus copy by email, fire-and-forget.
       notifyByEmail(nombre, telefono, horarioTexto);
 
       // ---- build confirmation screen ----
