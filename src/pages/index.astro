@@ -1,378 +1,714 @@
 ---
-import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
-
-import charCoffee from '../assets/char_coffee.png';
-import charWave from '../assets/char_wave.png';
 ---
 
-<Layout title="Menú de Mimo — Mimo Estudio & Barra">
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="i-moon" viewBox="0 0 24 24">
-      <path
-        d="M20 14.5A8.5 8.5 0 1 1 9.5 4 6.5 6.5 0 0 0 20 14.5Z"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.8"
-        stroke-linejoin="round"
-      />
-    </symbol>
-    <symbol id="i-sun" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8" />
-      <path
-        d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"
-        stroke="currentColor"
-        stroke-width="1.8"
-        stroke-linecap="round"
-      />
-    </symbol>
-    <symbol id="i-cup" viewBox="0 0 48 48">
-      <path
-        d="M9 33 L11 17 H31 L33 33 Q22 40 9 33Z"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.6"
-        stroke-linejoin="round"
-      />
-      <path
-        d="M31 20c6-2 9 1 8 6s-6 6-10 5"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.6"
-        stroke-linecap="round"
-      />
-      <path
-        d="M17 6c-2 2-2 4 0 6M23 6c-2 2-2 4 0 6M29 6c-2 2-2 4 0 6"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.2"
-        stroke-linecap="round"
-      />
-    </symbol>
-    <symbol id="i-glass" viewBox="0 0 48 48">
-      <path
-        d="M14 10h20l-3 30a3 3 0 01-3 3H20a3 3 0 01-3-3L14 10Z"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.6"
-        stroke-linejoin="round"
-      />
-      <path d="M14.8 18h18.4" stroke="currentColor" stroke-width="2.2" />
-      <path d="M27 4l3 8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
-    </symbol>
-    <symbol id="i-plate" viewBox="0 0 48 48">
-      <circle cx="24" cy="26" r="14" fill="none" stroke="currentColor" stroke-width="2.6" />
-      <circle cx="24" cy="26" r="7" fill="none" stroke="currentColor" stroke-width="1.8" />
-      <path d="M8 8v9M12 8v9M8 12h4M10 17v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-      <path d="M40 8v18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-    </symbol>
-    <symbol id="i-drop" viewBox="0 0 48 48">
-      <path
-        d="M24 4C24 4 12 20 12 29a12 12 0 0024 0C36 20 24 4 24 4Z"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.6"
-        stroke-linejoin="round"
-      />
-      <path d="M18 30c0 3 2.5 5 6 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-    </symbol>
-    <symbol id="i-facebook" viewBox="0 0 48 48">
-      <circle cx="24" cy="24" r="19" fill="none" stroke="currentColor" stroke-width="2.6" />
-      <path
-        d="M28 16h-3.5c-1.7 0-3 1.3-3 3v4h-3.5v4.5H21.5V38h4.5V27.5h3.3l.7-4.5h-4V17c0-.6.4-1 1-1H28v-4Z"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.2"
-        stroke-linejoin="round"
-      />
-    </symbol>
-    <symbol id="i-instagram" viewBox="0 0 48 48">
-      <rect x="6" y="6" width="36" height="36" rx="11" fill="none" stroke="currentColor" stroke-width="2.6" />
-      <circle cx="24" cy="24" r="8.5" fill="none" stroke="currentColor" stroke-width="2.6" />
-      <circle cx="33.5" cy="14.5" r="1.8" fill="currentColor" />
-    </symbol>
-  </svg>
+<Layout title="Open House — Mimo Estudio & Barra">
+  <main class="hero">
+    <div class="bg" aria-hidden="true"></div>
+    <div class="scrim" aria-hidden="true"></div>
 
-  <header>
-    <div class="wrap headbar">
-      <img class="logo-img" src={`${import.meta.env.BASE_URL}mimo-logo-blanco.png`} alt="Mimo Estudio & Barra" />
-      <nav>
-        <a href="#menu">Menú</a>
-        <a href="#quien-es">Quién es Mimo</a>
-        <a href="#visitanos">Visítanos</a>
-        <a class="nav-cta" href="#menu">Ver menú</a>
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar entre modo claro y oscuro">
-          <svg class="icon-moon"><use href="#i-moon" /></svg>
-          <svg class="icon-sun"><use href="#i-sun" /></svg>
-        </button>
-      </nav>
-    </div>
-  </header>
+    <div class="content">
+      <img class="logo" src="/mimo-logo-blanco.png" alt="Mimo Estudio & Barra" />
 
-  <main>
-    <div class="wrap">
-      <section class="hero">
-        <div class="hero-copy">
-          <h1>Un ratito<br />para ti,<br />consiéntete y <em>mímate</em>.</h1>
-          <p class="lede">
-            Entre clase y clase, te esperamos en nuestra barra.<br />
-            Café, bebidas frías y snacks disponibles para ti.
-          </p>
-          <div class="hero-ctas">
-            <a class="btn btn-primary" href="#menu">Ver el menú ☕</a>
-            <a class="btn btn-ghost" href="#quien-es">Conoce a Mimo</a>
-          </div>
+      <p class="eyebrow">Te invitamos a conocer el espacio</p>
+      <h1 class="title">
+        <span>OPEN</span>
+        <span>HOUSE</span>
+      </h1>
+      <p class="dates">27 y 28 de noviembre, 2026</p>
+
+      <div class="schedule">
+        <div class="day">
+          <span class="day-name">Viernes 27</span>
+          <span class="day-time">9:00 am – 2:00 pm &nbsp;y&nbsp; 4:00 pm – 8:00 pm</span>
         </div>
-        <div class="hero-art">
-          <div class="blob"></div>
-          <Image class="illus" src={charCoffee} alt="Ilustración de Mimo tomando un café calientito" width={700} />
-        </div>
-      </section>
-    </div>
-
-    <section id="menu">
-      <div class="wrap">
-        <div class="section-head" data-reveal>
-          <h2>Nuestro menú</h2>
-          <p>
-            Todo pensado para antes o después de tu clase: bebidas calientes, algo frío, snacks
-            que rinden y extras de bienestar.
-          </p>
-        </div>
-
-        <div class="category" data-reveal>
-          <div class="category-head">
-            <svg class="icon"><use href="#i-cup" /></svg>
-            <h3>Calientitos</h3>
-            <div class="rule"></div>
-          </div>
-          <div class="card-grid">
-            <div class="item-card">
-              <div class="item-top"><span class="item-name">Espresso Mimo</span><span class="item-price">$35</span></div>
-              <p class="item-desc">Doble shot, tostado suave. Rápido y directo al punto.</p>
-            </div>
-            <div class="item-card">
-              <div class="item-top"><span class="item-name">Capuchino clásico</span><span class="item-price">$45</span></div>
-              <p class="item-desc">Espuma tupida y un toque de canela si tú quieres.</p>
-            </div>
-            <div class="item-card">
-              <div class="item-top"><span class="item-name">Latte de vainilla</span><span class="item-price">$48</span></div>
-              <p class="item-desc">Leche de tu elección, vainilla natural, muy suave.</p>
-            </div>
-            <div class="item-card">
-              <div class="item-top"><span class="item-name">Matcha latte</span><span class="item-price">$55</span></div>
-              <p class="item-desc">Matcha ceremonial batida a mano, poco dulce.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="category" data-reveal>
-          <div class="category-head">
-            <svg class="icon"><use href="#i-glass" /></svg>
-            <h3>Fríos &amp; batidos</h3>
-            <div class="rule"></div>
-          </div>
-          <div class="card-grid">
-            <div class="item-card">
-              <div class="item-top"><span class="item-name">Cold brew</span><span class="item-price">$48</span></div>
-              <p class="item-desc">12 horas de reposo en frío. Suave y con cuerpo.</p>
-            </div>
-            <div class="item-card">
-              <div class="item-top"><span class="item-name">Limonada de romero</span><span class="item-price">$42</span></div>
-              <p class="item-desc">Refrescante, poco dulce, con un toque de hierbas.</p>
-            </div>
-            <div class="item-card">
-              <div class="item-top"><span class="item-name">Smoothie verde detox</span><span class="item-price">$65</span></div>
-              <p class="item-desc">Espinaca, piña, jengibre y un toque de menta.</p>
-            </div>
-            <div class="item-card">
-              <div class="item-top"><span class="item-name">Batido proteico</span><span class="item-price">$70</span></div>
-              <p class="item-desc">Plátano, mantequilla de maní y whey de vainilla.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="category" data-reveal>
-          <div class="category-head">
-            <svg class="icon"><use href="#i-plate" /></svg>
-            <h3>Para picar</h3>
-            <div class="rule"></div>
-          </div>
-          <div class="card-grid">
-            <div class="item-card">
-              <div class="item-top"><span class="item-name">Toast de aguacate</span><span class="item-price">$68</span></div>
-              <p class="item-desc">Pan integral, aguacate, chile de árbol y limón.</p>
-            </div>
-            <div class="item-card">
-              <div class="item-top"><span class="item-name">Avena overnight</span><span class="item-price">$60</span></div>
-              <p class="item-desc">Avena, leche de coco y frutos rojos de temporada.</p>
-            </div>
-            <div class="item-card">
-              <div class="item-top"><span class="item-name">Energy balls</span><span class="item-price">$40</span></div>
-              <p class="item-desc">Dátil, avena y cacao. Vienen 3 piezas.</p>
-            </div>
-            <div class="item-card">
-              <div class="item-top"><span class="item-name">Yogurt griego &amp; granola</span><span class="item-price">$55</span></div>
-              <p class="item-desc">Granola casera tostada y miel de abeja.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="category" data-reveal>
-          <div class="category-head">
-            <svg class="icon"><use href="#i-drop" /></svg>
-            <h3>Extras de bienestar</h3>
-            <div class="rule"></div>
-          </div>
-          <div class="card-grid">
-            <div class="item-card">
-              <div class="item-top"><span class="item-name">Shot jengibre &amp; cúrcuma</span><span class="item-price">$30</span></div>
-              <p class="item-desc">Un empujoncito antiinflamatorio, directo.</p>
-            </div>
-            <div class="item-card">
-              <div class="item-top"><span class="item-name">Colágeno hidrolizado</span><span class="item-price">+$15</span></div>
-              <p class="item-desc">Añádelo a cualquier bebida caliente o fría.</p>
-            </div>
-            <div class="item-card">
-              <div class="item-top"><span class="item-name">Proteína extra</span><span class="item-price">+$20</span></div>
-              <p class="item-desc">Scoop extra en tu batido o smoothie favorito.</p>
-            </div>
-            <div class="item-card">
-              <div class="item-top"><span class="item-name">Agua mineral</span><span class="item-price">$25</span></div>
-              <p class="item-desc">Con o sin gas, bien fría.</p>
-            </div>
-          </div>
+        <div class="day">
+          <span class="day-name">Sábado 28</span>
+          <span class="day-time">9:00 am – 12:00 pm</span>
         </div>
       </div>
-    </section>
 
-
-    <section id="quien-es">
-      <div class="wrap">
-        <div class="quien" data-reveal>
-          <div class="quien-art">
-            <Image class="illus" src={charWave} alt="Ilustración de Mimo saludando" width={700} />
-          </div>
-          <div class="quien-copy">
-            <h2>¿Quién es Mimo?</h2>
-            <p>
-              Mimo es cálida, cercana y motivadora, la amiga que te invita a mimarte. Le encanta
-              acompañarte en cada gesto: estirar, respirar, moverte y también sentarte un ratito
-              a mimarte. Su mundo es el ejercicio, el café, la comunidad y el autocuidado.
-            </p>
-            <div class="tag-row">
-              <span class="tag">🧘 ejercicio</span>
-              <span class="tag">☕ café</span>
-              <span class="tag">🤍 comunidad</span>
-              <span class="tag">🌿 autocuidado</span>
-            </div>
-          </div>
-        </div>
+      <div class="countdown" id="countdown" aria-live="polite">
+        <div class="unit"><span class="num" id="cd-days">00</span><span class="label">días</span></div>
+        <div class="unit"><span class="num" id="cd-hours">00</span><span class="label">hrs</span></div>
+        <div class="unit"><span class="num" id="cd-mins">00</span><span class="label">min</span></div>
+        <div class="unit"><span class="num" id="cd-secs">00</span><span class="label">seg</span></div>
       </div>
-    </section>
+      <p class="countdown-caption">Para el viernes 27 de noviembre, 9:00 am</p>
+
+      <button class="cta" id="open-registro" type="button">Registro gratuito</button>
+    </div>
   </main>
 
-  <footer id="visitanos">
-    <div class="wrap">
-      <div>
-        <h4>Visítanos</h4>
-        <p>
-          <a class="map-link" href="https://maps.app.goo.gl/1QsWzESnLf1ouyam9" target="_blank" rel="noopener">
-            Torreón - San Pedro 8500 Interior 6<br />
-            Calle Carretera a San Pedro 8500<br />
-            La Conchita Roja, Ejido Ampliación Allende<br />
-            27426 Torreón, Coah.
-          </a>
-        </p>
-      </div>
-      <div>
-        <h4>Horario</h4>
-        <ul>
-          <li>Lun – Vie · 7:00 – 20:00</li>
-          <li>Sábado · 8:00 – 14:00</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Síguenos</h4>
-        <div class="social-row">
-          <a
-            class="social-link"
-            href="http://facebook.com/mimoestudio.mx"
-            target="_blank"
-            rel="noopener"
-            aria-label="Facebook de Mimo Estudio & Barra"
-          >
-            <svg class="icon"><use href="#i-facebook" /></svg>
-          </a>
-          <a
-            class="social-link"
-            href="https://instagram.com/mimoestudio.mx"
-            target="_blank"
-            rel="noopener"
-            aria-label="Instagram de Mimo Estudio & Barra"
-          >
-            <svg class="icon"><use href="#i-instagram" /></svg>
-          </a>
+  <!-- ===================== Modal de registro ===================== -->
+  <div class="modal-backdrop" id="modal-backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" type="button" aria-label="Cerrar">&times;</button>
+
+      <!-- Paso 1: datos -->
+      <section class="step" id="step-1">
+        <p class="step-count">Paso 1 de 2</p>
+        <h2 id="modal-title">Regístrate al Open House</h2>
+        <p class="step-sub">Déjanos tus datos para apartar tu lugar.</p>
+        <label class="field">
+          <span>Nombre</span>
+          <input type="text" id="f-nombre" autocomplete="name" placeholder="Tu nombre completo" />
+        </label>
+        <label class="field">
+          <span>Número de celular</span>
+          <input type="tel" id="f-telefono" autocomplete="tel" placeholder="871 000 0000" />
+        </label>
+        <p class="field-error" id="step1-error" hidden>Completa tu nombre y celular para continuar.</p>
+        <button class="btn-primary" id="to-step-2" type="button">Siguiente →</button>
+      </section>
+
+      <!-- Paso 2: horario -->
+      <section class="step" id="step-2" hidden>
+        <p class="step-count">Paso 2 de 2</p>
+        <h2>¿Qué día y hora te gustaría venir?</h2>
+        <p class="step-sub">Elige el horario que mejor te quede.</p>
+        <div class="slots" id="slots"></div>
+        <p class="field-error" id="step2-error" hidden>Elige un horario para continuar.</p>
+        <div class="step-actions">
+          <button class="btn-ghost" id="back-step-1" type="button">← Atrás</button>
+          <button class="btn-primary" id="submit-registro" type="button">Enviar registro</button>
         </div>
-        <ul>
-          <li><a href="mailto:myrnavelazquez@mimoestudio.mx">myrnavelazquez@mimoestudio.mx</a></li>
-          <li><a href="mailto:alebourguet@mimoestudio.mx">alebourguet@mimoestudio.mx</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="wrap foot-bottom">
-      <img src={`${import.meta.env.BASE_URL}m-logo-blanoc.png`} alt="" class="foot-mark" />
-      <span>© 2026 Mimo Estudio &amp; Barra</span>
-    </div>
-  </footer>
+        <p class="whatsapp-note">Se abrirá WhatsApp con tus datos listos para confirmar tu lugar.</p>
+      </section>
 
-  <script>
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const els = document.querySelectorAll('[data-reveal]');
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('in');
-              io.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.15 }
-      );
-      els.forEach((el) => io.observe(el));
+      <!-- Paso 3: confirmación -->
+      <section class="step" id="step-3" hidden>
+        <div class="confirm-head">
+          <h2>¡Listo, <span id="confirm-name">!</span> 🎉</h2>
+          <p id="confirm-slot" class="step-sub"></p>
+        </div>
+
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3597.5607333398707!2d-103.39486448889134!3d25.619508914371654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x868fd1488765cf9d%3A0x613eb8605985f13!2sMimo%20Estudio%20%26%20Barra!5e0!3m2!1ses!2smx!4v1788617074953!5m2!1ses!2smx"
+            title="Ubicación de Mimo Estudio & Barra"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+          ></iframe>
+        </div>
+        <p class="address">Carretera a San Pedro 8500 Interior 6, Torreón, Coah.</p>
+
+        <p class="cal-label">Agrega el recordatorio a tu calendario:</p>
+        <div class="cal-buttons">
+          <a class="cal-btn" id="cal-google" href="#" target="_blank" rel="noopener">Google Calendar</a>
+          <a class="cal-btn" id="cal-outlook" href="#" target="_blank" rel="noopener">Outlook</a>
+          <a class="cal-btn" id="cal-apple" href="#" download="mimo-open-house.ics">Apple / iOS</a>
+        </div>
+
+        <button class="btn-ghost" id="close-step-3" type="button">Cerrar</button>
+      </section>
+    </div>
+  </div>
+
+  <style is:global>
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 48px 24px;
     }
-  </script>
+    .bg {
+      position: absolute;
+      inset: 0;
+      background: url('/openhouse-bg.jpg') center / cover no-repeat;
+    }
+    .scrim {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(28, 30, 21, 0.45) 0%, rgba(28, 30, 21, 0.72) 100%);
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .logo {
+      height: 54px;
+      width: auto;
+      margin-bottom: 28px;
+    }
+    .eyebrow {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-mid);
+      margin: 0 0 6px;
+    }
+    h1.title {
+      font-family: 'FreightMacro', Georgia, serif;
+      font-weight: 700;
+      margin: 0;
+      line-height: 0.92;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      letter-spacing: 0.01em;
+    }
+    h1.title span {
+      font-size: clamp(3.2rem, 13vw, 7.5rem);
+    }
+    .dates {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+      color: var(--on-accent);
+      margin: 18px 0 28px;
+    }
+    .schedule {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+    .day {
+      background: rgba(251, 249, 238, 0.1);
+      border: 1px solid rgba(251, 249, 238, 0.25);
+      border-radius: 14px;
+      padding: 12px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 220px;
+    }
+    .day-name {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+    }
+    .day-time {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: rgba(251, 249, 238, 0.85);
+    }
+    .countdown {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .unit {
+      background: rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(251, 249, 238, 0.2);
+      border-radius: 12px;
+      padding: 10px 14px;
+      min-width: 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .unit .num {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.4rem, 4vw, 1.9rem);
+      color: #fff;
+      font-variant-numeric: tabular-nums;
+    }
+    .unit .label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-mid);
+    }
+    .countdown-caption {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      color: rgba(251, 249, 238, 0.7);
+      margin: 0 0 34px;
+    }
+    .cta {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      background: var(--accent-mid);
+      color: #20230f;
+      border: none;
+      padding: 16px 40px;
+      border-radius: 100px;
+      box-shadow: 0 10px 0 0 var(--accent-strong);
+      transition: transform 0.15s ease;
+    }
+    .cta:hover {
+      transform: translateY(-2px);
+    }
+    .cta:active {
+      transform: translateY(4px);
+      box-shadow: 0 4px 0 0 var(--accent-strong);
+    }
+
+    /* ---------- Modal ---------- */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 11, 7, 0.72);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 50;
+    }
+    .modal {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--paper);
+      color: var(--ink);
+      border-radius: 20px;
+      padding: 36px 30px 30px;
+    }
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      line-height: 1;
+      color: var(--ink);
+      opacity: 0.6;
+    }
+    .modal-close:hover {
+      opacity: 1;
+    }
+    .step-count {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 6px;
+    }
+    .modal h2 {
+      font-family: 'FreightMacro', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.7rem;
+      margin: 0 0 6px;
+      line-height: 1.1;
+    }
+    .step-sub {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.92rem;
+      color: #5b5f45;
+      margin: 0 0 22px;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+    .field span {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      color: var(--accent-strong);
+    }
+    .field input {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1.5px solid #D9D4BC;
+      background: #fff;
+      color: var(--ink);
+    }
+    .field input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .field-error {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem;
+      color: #a3402c;
+      margin: -6px 0 14px;
+    }
+    .btn-primary {
+      width: 100%;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      background: var(--accent);
+      color: var(--on-accent);
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      margin-top: 6px;
+    }
+    .btn-primary:hover {
+      background: var(--accent-strong);
+    }
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .btn-ghost {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      background: none;
+      border: none;
+      color: var(--accent-strong);
+      padding: 10px;
+    }
+    .step-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .step-actions .btn-primary {
+      width: auto;
+      flex: 1;
+    }
+    .whatsapp-note {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      color: #5b5f45;
+      text-align: center;
+      margin: 10px 0 0;
+    }
+
+    .slots {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .slot-group-label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--accent-strong);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .slot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .slot-btn {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: 0.8rem;
+      background: #fff;
+      border: 1.5px solid #D9D4BC;
+      color: var(--ink);
+      padding: 10px 6px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .slot-btn:hover {
+      border-color: var(--accent);
+    }
+    .slot-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--on-accent);
+    }
+
+    .confirm-head h2 {
+      font-size: 1.6rem;
+    }
+    .map-wrap {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #D9D4BC;
+      margin-bottom: 8px;
+    }
+    .map-wrap iframe {
+      width: 100%;
+      height: 220px;
+      border: 0;
+      display: block;
+    }
+    .address {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem;
+      color: #5b5f45;
+      margin: 0 0 22px;
+    }
+    .cal-label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--accent-strong);
+      margin: 0 0 10px;
+    }
+    .cal-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .cal-btn {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.92rem;
+      text-decoration: none;
+      text-align: center;
+      background: #fff;
+      border: 1.5px solid #D9D4BC;
+      color: var(--ink);
+      padding: 12px;
+      border-radius: 10px;
+    }
+    .cal-btn:hover {
+      border-color: var(--accent);
+    }
+    #close-step-3 {
+      width: 100%;
+      text-align: center;
+      background: var(--accent);
+      color: var(--on-accent);
+      border-radius: 10px;
+    }
+    #close-step-3:hover {
+      background: var(--accent-strong);
+    }
+
+    @media (max-width: 480px) {
+      .slot-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .schedule {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
 
   <script>
-    (function () {
-      const STORAGE_KEY = 'mimo-theme';
-      const btn = document.getElementById('theme-toggle');
-      if (!btn) return;
+    // ---------- Countdown ----------
+    const TARGET = new Date('2026-11-27T09:00:00-06:00').getTime();
+    function tickCountdown() {
+      const diff = Math.max(0, TARGET - Date.now());
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const mins = Math.floor((diff % 3600000) / 60000);
+      const secs = Math.floor((diff % 60000) / 1000);
+      const pad = (n: number) => String(n).padStart(2, '0');
+      const set = (id: string, v: string) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = v;
+      };
+      set('cd-days', pad(days));
+      set('cd-hours', pad(hours));
+      set('cd-mins', pad(mins));
+      set('cd-secs', pad(secs));
+    }
+    tickCountdown();
+    setInterval(tickCountdown, 1000);
 
-      function systemPrefersDark() {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // ---------- Time slots ----------
+    type Slot = { id: string; day: string; dayLabel: string; start: number; end: number };
+
+    function formatHour(h: number) {
+      const ampm = h < 12 || h === 24 ? 'am' : 'pm';
+      let h12 = h % 12;
+      if (h12 === 0) h12 = 12;
+      return `${h12}:00 ${ampm}`;
+    }
+
+    function buildSlots(day: string, dayLabel: string, hours: number[]): Slot[] {
+      const out: Slot[] = [];
+      for (let i = 0; i < hours.length - 1; i++) {
+        if (hours[i + 1] - hours[i] !== 1) continue;
+        out.push({
+          id: `${day}-${hours[i]}`,
+          day,
+          dayLabel,
+          start: hours[i],
+          end: hours[i + 1],
+        });
       }
-      function effectiveTheme() {
-        let saved = null;
-        try {
-          saved = localStorage.getItem(STORAGE_KEY);
-        } catch (e) {}
-        if (saved === 'light' || saved === 'dark') return saved;
-        return systemPrefersDark() ? 'dark' : 'light';
-      }
+      return out;
+    }
 
-      // keep the icon in sync with the theme actually applied right now
-      btn.setAttribute('data-current', effectiveTheme());
+    const groups: { label: string; slots: Slot[] }[] = [
+      { label: 'Viernes 27 · Mañana', slots: buildSlots('2026-11-27', 'viernes 27 de noviembre', [9, 10, 11, 12, 13, 14]) },
+      { label: 'Viernes 27 · Tarde', slots: buildSlots('2026-11-27', 'viernes 27 de noviembre', [16, 17, 18, 19, 20]) },
+      { label: 'Sábado 28', slots: buildSlots('2026-11-28', 'sábado 28 de noviembre', [9, 10, 11, 12]) },
+    ];
 
-      btn.addEventListener('click', function () {
-        const next = effectiveTheme() === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-        try {
-          localStorage.setItem(STORAGE_KEY, next);
-        } catch (e) {}
-        btn.setAttribute('data-current', next);
+    const slotsContainer = document.getElementById('slots');
+    let selectedSlot: Slot | null = null;
+
+    if (slotsContainer) {
+      groups.forEach((group) => {
+        const wrap = document.createElement('div');
+        const label = document.createElement('span');
+        label.className = 'slot-group-label';
+        label.textContent = group.label;
+        wrap.appendChild(label);
+
+        const grid = document.createElement('div');
+        grid.className = 'slot-grid';
+        group.slots.forEach((slot) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'slot-btn';
+          btn.textContent = `${formatHour(slot.start)} – ${formatHour(slot.end)}`;
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.slot-btn').forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedSlot = slot;
+            hide('step2-error');
+          });
+          grid.appendChild(btn);
+        });
+        wrap.appendChild(grid);
+        slotsContainer.appendChild(wrap);
       });
-    })();
+    }
+
+    // ---------- Modal plumbing ----------
+    function show(id: string) {
+      document.getElementById(id)?.removeAttribute('hidden');
+    }
+    function hide(id: string) {
+      document.getElementById(id)?.setAttribute('hidden', '');
+    }
+
+    const backdrop = document.getElementById('modal-backdrop');
+    document.getElementById('open-registro')?.addEventListener('click', () => {
+      backdrop?.removeAttribute('hidden');
+      show('step-1');
+      hide('step-2');
+      hide('step-3');
+    });
+    function closeModal() {
+      backdrop?.setAttribute('hidden', '');
+    }
+    document.getElementById('modal-close')?.addEventListener('click', closeModal);
+    document.getElementById('close-step-3')?.addEventListener('click', closeModal);
+    backdrop?.addEventListener('click', (e) => {
+      if (e.target === backdrop) closeModal();
+    });
+
+    document.getElementById('to-step-2')?.addEventListener('click', () => {
+      const nombre = (document.getElementById('f-nombre') as HTMLInputElement)?.value.trim();
+      const telefono = (document.getElementById('f-telefono') as HTMLInputElement)?.value.trim();
+      if (!nombre || !telefono) {
+        show('step1-error');
+        return;
+      }
+      hide('step1-error');
+      hide('step-1');
+      show('step-2');
+    });
+
+    document.getElementById('back-step-1')?.addEventListener('click', () => {
+      hide('step-2');
+      show('step-1');
+    });
+
+    // Best-effort silent copy to the business inbox. Never blocks or fails the
+    // flow for the visitor — WhatsApp (below) is the reliable channel.
+    function notifyByEmail(nombre: string, telefono: string, horarioTexto: string) {
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 4000);
+        fetch('https://formsubmit.co/ajax/myrnavelazquez@mimoestudio.mx', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          signal: controller.signal,
+          body: JSON.stringify({
+            Nombre: nombre,
+            Teléfono: telefono,
+            Horario: horarioTexto,
+            _subject: 'Nuevo registro — Open House Mimo',
+            _cc: 'alebourguet@mimoestudio.mx',
+            _template: 'table',
+          }),
+        })
+          .catch(() => {})
+          .finally(() => clearTimeout(timeout));
+      } catch (e) {}
+    }
+
+    document.getElementById('submit-registro')?.addEventListener('click', () => {
+      if (!selectedSlot) {
+        show('step2-error');
+        return;
+      }
+      hide('step2-error');
+
+      const nombre = (document.getElementById('f-nombre') as HTMLInputElement).value.trim();
+      const telefono = (document.getElementById('f-telefono') as HTMLInputElement).value.trim();
+      const horarioTexto = `${selectedSlot.dayLabel}, ${formatHour(selectedSlot.start)} – ${formatHour(selectedSlot.end)}`;
+
+      // 1) Reliable channel: open WhatsApp with the registration pre-filled.
+      const waText =
+        `Hola, quiero registrarme al Open House de Mimo:\n` +
+        `Nombre: ${nombre}\nCelular: ${telefono}\nHorario: ${horarioTexto}`;
+      window.open(`https://wa.me/528714086618?text=${encodeURIComponent(waText)}`, '_blank');
+
+      // 2) Best-effort bonus copy by email, fire-and-forget.
+      notifyByEmail(nombre, telefono, horarioTexto);
+
+      // ---- build confirmation screen ----
+      const nameEl = document.getElementById('confirm-name');
+      if (nameEl) nameEl.textContent = nombre;
+      const slotEl = document.getElementById('confirm-slot');
+      if (slotEl) slotEl.textContent = `Te esperamos el ${horarioTexto}.`;
+
+      const startDate = new Date(`${selectedSlot.day}T${String(selectedSlot.start).padStart(2, '0')}:00:00-06:00`);
+      const endDate = new Date(`${selectedSlot.day}T${String(selectedSlot.end).padStart(2, '0')}:00:00-06:00`);
+      const fmtUTC = (d: Date) => d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+      const location = 'Carretera a San Pedro 8500 Interior 6, Torreón, Coah.';
+      const title = 'Open House — Mimo Estudio & Barra';
+      const details = 'Te esperamos en Mimo Estudio & Barra para conocer el espacio.';
+
+      const gcal = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${fmtUTC(startDate)}/${fmtUTC(endDate)}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
+      (document.getElementById('cal-google') as HTMLAnchorElement).href = gcal;
+
+      const outlook = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(title)}&startdt=${startDate.toISOString()}&enddt=${endDate.toISOString()}&location=${encodeURIComponent(location)}&body=${encodeURIComponent(details)}&path=/calendar/action/compose&rru=addevent`;
+      (document.getElementById('cal-outlook') as HTMLAnchorElement).href = outlook;
+
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Mimo Estudio & Barra//Open House//ES',
+        'BEGIN:VEVENT',
+        `UID:${Date.now()}@mimoestudio.mx`,
+        `DTSTAMP:${fmtUTC(new Date())}`,
+        `DTSTART:${fmtUTC(startDate)}`,
+        `DTEND:${fmtUTC(endDate)}`,
+        `SUMMARY:${title}`,
+        `DESCRIPTION:${details}`,
+        `LOCATION:${location}`,
+        'END:VEVENT',
+        'END:VCALENDAR',
+      ].join('\r\n');
+      const icsBlob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      (document.getElementById('cal-apple') as HTMLAnchorElement).href = URL.createObjectURL(icsBlob);
+
+      hide('step-2');
+      show('step-3');
+    });
   </script>
 </Layout>
