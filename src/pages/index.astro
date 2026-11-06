@@ -76,7 +76,7 @@ import Layout from '../layouts/Layout.astro';
           <button class="btn-ghost" id="back-step-1" type="button">← Atrás</button>
           <button class="btn-primary" id="submit-registro" type="button">Enviar registro</button>
         </div>
-        <p class="whatsapp-note">Se abrirá WhatsApp con tus datos listos para confirmar tu lugar.</p>
+        <p class="whatsapp-note">Tu lugar quedará registrado automáticamente, sin salir de esta página.</p>
       </section>
 
       <!-- Paso 3: confirmación -->
@@ -703,7 +703,7 @@ import Layout from '../layouts/Layout.astro';
     }
 
     // Best-effort silent copy to the business inboxes. Never blocks or fails the
-    // flow for the visitor — WhatsApp (below) is the reliable channel.
+    // flow for the visitor — the Google Sheet (above) is the reliable record.
     function notifyByEmail(nombre: string, telefono: string, horarioTexto: string) {
       try {
         const controller = new AbortController();
@@ -737,16 +737,10 @@ import Layout from '../layouts/Layout.astro';
       const telefono = (document.getElementById('f-telefono') as HTMLInputElement).value.trim();
       const horarioTexto = `${selectedSlot.dayLabel}, ${formatHour(selectedSlot.hour)}`;
 
-      // 1) Reliable channel: open WhatsApp with the registration pre-filled.
-      const waText =
-        `Hola, quiero registrarme al Open House de Mimo:\n` +
-        `Nombre: ${nombre}\nCelular: ${telefono}\nHorario: ${horarioTexto}`;
-      window.open(`https://wa.me/528714086618?text=${encodeURIComponent(waText)}`, '_blank');
-
-      // 2) Log the registration in the Google Sheet, fire-and-forget.
+      // 1) Log the registration in the Google Sheet, fire-and-forget.
       notifyBySheet(nombre, telefono, selectedSlot.dayLabel, formatHour(selectedSlot.hour));
 
-      // 3) Best-effort bonus copy by email, fire-and-forget.
+      // 2) Best-effort bonus copy by email, fire-and-forget.
       notifyByEmail(nombre, telefono, horarioTexto);
 
       // ---- build confirmation screen ----
