@@ -691,13 +691,13 @@ import Layout from '../layouts/Layout.astro';
     // no-cors + text/plain to dodge a CORS preflight against Apps Script, so
     // the response isn't readable, but Apps Script still appends the row.
     const SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzF2uCibQpN5_XKZv1jlJXve4jlmFSG23vwnstO0sceJPav7uCNCWlkYaPV7254Vo_D/exec';
-    function notifyBySheet(nombre: string, telefono: string, dia: string, hora: string) {
+    function notifyBySheet(nombre: string, telefono: string, dia: string, hora: string, fechaISO: string, horaNum: number) {
       try {
         fetch(SHEET_WEBHOOK_URL, {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ nombre, telefono, dia, hora }),
+          body: JSON.stringify({ nombre, telefono, dia, hora, fechaISO, horaNum }),
         }).catch(() => {});
       } catch (e) {}
     }
@@ -738,7 +738,7 @@ import Layout from '../layouts/Layout.astro';
       const horarioTexto = `${selectedSlot.dayLabel}, ${formatHour(selectedSlot.hour)}`;
 
       // 1) Log the registration in the Google Sheet, fire-and-forget.
-      notifyBySheet(nombre, telefono, selectedSlot.dayLabel, formatHour(selectedSlot.hour));
+      notifyBySheet(nombre, telefono, selectedSlot.dayLabel, formatHour(selectedSlot.hour), selectedSlot.day, selectedSlot.hour);
 
       // 2) Best-effort bonus copy by email, fire-and-forget.
       notifyByEmail(nombre, telefono, horarioTexto);
