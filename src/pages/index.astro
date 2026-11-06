@@ -10,12 +10,12 @@ import Layout from '../layouts/Layout.astro';
     <div class="content">
       <img class="logo" src="/mimo-logo-blanco.png" alt="Mimo Estudio & Barra" />
 
-      <p class="eyebrow">Te invitamos a conocer el espacio</p>
+      <p class="eyebrow">Te invitamos a conocer nuestro estudio</p>
       <h1 class="title">
         <span>OPEN</span>
         <span>HOUSE</span>
       </h1>
-      <p class="dates">27 y 28 de noviembre, 2026</p>
+      <p class="dates">27 y 28 de noviembre 2026</p>
 
       <div class="schedule">
         <div class="day">
@@ -34,7 +34,6 @@ import Layout from '../layouts/Layout.astro';
         <div class="unit"><span class="num" id="cd-mins">00</span><span class="label">min</span></div>
         <div class="unit"><span class="num" id="cd-secs">00</span><span class="label">seg</span></div>
       </div>
-      <p class="countdown-caption">Para el viernes 27 de noviembre, 9:00 am</p>
 
       <button class="cta" id="open-registro" type="button">Registro gratuito</button>
     </div>
@@ -66,7 +65,11 @@ import Layout from '../layouts/Layout.astro';
       <section class="step" id="step-2" hidden>
         <p class="step-count">Paso 2 de 2</p>
         <h2>¿Qué día y hora te gustaría venir?</h2>
-        <p class="step-sub">Elige el horario que mejor te quede.</p>
+        <p class="step-sub">Primero elige el día y después tu hora de llegada.</p>
+        <div class="day-select" id="day-select">
+          <button class="day-btn" type="button" data-day="2026-11-27">Viernes 27</button>
+          <button class="day-btn" type="button" data-day="2026-11-28">Sábado 28</button>
+        </div>
         <div class="slots" id="slots"></div>
         <p class="field-error" id="step2-error" hidden>Elige un horario para continuar.</p>
         <div class="step-actions">
@@ -202,7 +205,7 @@ import Layout from '../layouts/Layout.astro';
     .countdown {
       display: flex;
       gap: 12px;
-      margin-bottom: 8px;
+      margin-bottom: 34px;
     }
     .unit {
       background: rgba(0, 0, 0, 0.28);
@@ -227,12 +230,6 @@ import Layout from '../layouts/Layout.astro';
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--accent-mid);
-    }
-    .countdown-caption {
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.8rem;
-      color: rgba(251, 249, 238, 0.7);
-      margin: 0 0 34px;
     }
     .cta {
       font-family: 'Poppins', sans-serif;
@@ -391,6 +388,31 @@ import Layout from '../layouts/Layout.astro';
       margin: 10px 0 0;
     }
 
+    .day-select {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .day-btn {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      background: #fff;
+      border: 1.5px solid #D9D4BC;
+      color: var(--ink);
+      padding: 14px 10px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .day-btn:hover {
+      border-color: var(--accent);
+    }
+    .day-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--on-accent);
+    }
     .slots {
       display: flex;
       flex-direction: column;
@@ -523,8 +545,8 @@ import Layout from '../layouts/Layout.astro';
     tickCountdown();
     setInterval(tickCountdown, 1000);
 
-    // ---------- Time slots ----------
-    type Slot = { id: string; day: string; dayLabel: string; start: number; end: number };
+    // ---------- Time slots (day first, then arrival time) ----------
+    type Selected = { day: string; dayLabel: string; hour: number };
 
     function formatHour(h: number) {
       const ampm = h < 12 || h === 24 ? 'am' : 'pm';
@@ -533,49 +555,49 @@ import Layout from '../layouts/Layout.astro';
       return `${h12}:00 ${ampm}`;
     }
 
-    function buildSlots(day: string, dayLabel: string, hours: number[]): Slot[] {
-      const out: Slot[] = [];
-      for (let i = 0; i < hours.length - 1; i++) {
-        if (hours[i + 1] - hours[i] !== 1) continue;
-        out.push({
-          id: `${day}-${hours[i]}`,
-          day,
-          dayLabel,
-          start: hours[i],
-          end: hours[i + 1],
-        });
-      }
-      return out;
-    }
-
-    const groups: { label: string; slots: Slot[] }[] = [
-      { label: 'Viernes 27 · Mañana', slots: buildSlots('2026-11-27', 'viernes 27 de noviembre', [9, 10, 11, 12, 13, 14]) },
-      { label: 'Viernes 27 · Tarde', slots: buildSlots('2026-11-27', 'viernes 27 de noviembre', [16, 17, 18, 19, 20]) },
-      { label: 'Sábado 28', slots: buildSlots('2026-11-28', 'sábado 28 de noviembre', [9, 10, 11, 12]) },
+    const days: { dayId: string; dateLabel: string; periods: { label: string; hours: number[] }[] }[] = [
+      {
+        dayId: '2026-11-27',
+        dateLabel: 'viernes 27 de noviembre',
+        periods: [
+          { label: 'Mañana', hours: [9, 10, 11, 12, 13] },
+          { label: 'Tarde', hours: [16, 17, 18, 19] },
+        ],
+      },
+      {
+        dayId: '2026-11-28',
+        dateLabel: 'sábado 28 de noviembre',
+        periods: [{ label: '', hours: [9, 10, 11] }],
+      },
     ];
 
     const slotsContainer = document.getElementById('slots');
-    let selectedSlot: Slot | null = null;
+    let selectedSlot: Selected | null = null;
 
-    if (slotsContainer) {
-      groups.forEach((group) => {
+    function renderSlots(dayId: string) {
+      if (!slotsContainer) return;
+      slotsContainer.innerHTML = '';
+      const day = days.find((d) => d.dayId === dayId);
+      if (!day) return;
+      day.periods.forEach((period) => {
         const wrap = document.createElement('div');
-        const label = document.createElement('span');
-        label.className = 'slot-group-label';
-        label.textContent = group.label;
-        wrap.appendChild(label);
-
+        if (period.label) {
+          const label = document.createElement('span');
+          label.className = 'slot-group-label';
+          label.textContent = period.label;
+          wrap.appendChild(label);
+        }
         const grid = document.createElement('div');
         grid.className = 'slot-grid';
-        group.slots.forEach((slot) => {
+        period.hours.forEach((hour) => {
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = 'slot-btn';
-          btn.textContent = `${formatHour(slot.start)} – ${formatHour(slot.end)}`;
+          btn.textContent = formatHour(hour);
           btn.addEventListener('click', () => {
             document.querySelectorAll('.slot-btn').forEach((b) => b.classList.remove('active'));
             btn.classList.add('active');
-            selectedSlot = slot;
+            selectedSlot = { day: day.dayId, dayLabel: day.dateLabel, hour };
             hide('step2-error');
           });
           grid.appendChild(btn);
@@ -584,6 +606,16 @@ import Layout from '../layouts/Layout.astro';
         slotsContainer.appendChild(wrap);
       });
     }
+
+    document.querySelectorAll<HTMLButtonElement>('.day-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.day-btn').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedSlot = null;
+        hide('step2-error');
+        renderSlots(btn.dataset.day!);
+      });
+    });
 
     // ---------- Modal plumbing ----------
     function show(id: string) {
@@ -599,6 +631,9 @@ import Layout from '../layouts/Layout.astro';
       show('step-1');
       hide('step-2');
       hide('step-3');
+      document.querySelectorAll('.day-btn').forEach((b) => b.classList.remove('active'));
+      if (slotsContainer) slotsContainer.innerHTML = '';
+      selectedSlot = null;
     });
     function closeModal() {
       backdrop?.setAttribute('hidden', '');
@@ -626,7 +661,7 @@ import Layout from '../layouts/Layout.astro';
       show('step-1');
     });
 
-    // Best-effort silent copy to the business inbox. Never blocks or fails the
+    // Best-effort silent copy to the business inboxes. Never blocks or fails the
     // flow for the visitor — WhatsApp (below) is the reliable channel.
     function notifyByEmail(nombre: string, telefono: string, horarioTexto: string) {
       try {
@@ -641,7 +676,7 @@ import Layout from '../layouts/Layout.astro';
             Teléfono: telefono,
             Horario: horarioTexto,
             _subject: 'Nuevo registro — Open House Mimo',
-            _cc: 'alebourguet@mimoestudio.mx',
+            _cc: 'alebourguet@mimoestudio.mx,paqotorres@hotmail.com',
             _template: 'table',
           }),
         })
@@ -659,7 +694,7 @@ import Layout from '../layouts/Layout.astro';
 
       const nombre = (document.getElementById('f-nombre') as HTMLInputElement).value.trim();
       const telefono = (document.getElementById('f-telefono') as HTMLInputElement).value.trim();
-      const horarioTexto = `${selectedSlot.dayLabel}, ${formatHour(selectedSlot.start)} – ${formatHour(selectedSlot.end)}`;
+      const horarioTexto = `${selectedSlot.dayLabel}, ${formatHour(selectedSlot.hour)}`;
 
       // 1) Reliable channel: open WhatsApp with the registration pre-filled.
       const waText =
@@ -676,8 +711,8 @@ import Layout from '../layouts/Layout.astro';
       const slotEl = document.getElementById('confirm-slot');
       if (slotEl) slotEl.textContent = `Te esperamos el ${horarioTexto}.`;
 
-      const startDate = new Date(`${selectedSlot.day}T${String(selectedSlot.start).padStart(2, '0')}:00:00-06:00`);
-      const endDate = new Date(`${selectedSlot.day}T${String(selectedSlot.end).padStart(2, '0')}:00:00-06:00`);
+      const startDate = new Date(`${selectedSlot.day}T${String(selectedSlot.hour).padStart(2, '0')}:00:00-06:00`);
+      const endDate = new Date(startDate.getTime() + 60 * 60 * 1000);
       const fmtUTC = (d: Date) => d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
       const location = 'Carretera a San Pedro 8500 Interior 6, Torreón, Coah.';
       const title = 'Open House — Mimo Estudio & Barra';
