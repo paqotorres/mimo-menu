@@ -21,6 +21,18 @@ const {
     <link rel="icon" type="image/x-icon" href="/m-logo.ico" />
     <meta name="color-scheme" content="dark" />
     <title>{title}</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://mimoestudio.mx/og-open-house.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://mimoestudio.mx/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://mimoestudio.mx/og-open-house.jpg" />
   </head>
   <body>
     <slot />
