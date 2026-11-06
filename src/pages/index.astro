@@ -50,12 +50,12 @@ import Layout from '../layouts/Layout.astro';
         <h2 id="modal-title">Regístrate al Open House</h2>
         <p class="step-sub">Déjanos tus datos para apartar tu lugar.</p>
         <label class="field">
-          <span>Nombre</span>
-          <input type="text" id="f-nombre" autocomplete="name" placeholder="Tu nombre completo" />
+          <span>Nombre *</span>
+          <input type="text" id="f-nombre" autocomplete="name" placeholder="Tu nombre completo" required />
         </label>
         <label class="field">
-          <span>Número de celular</span>
-          <input type="tel" id="f-telefono" autocomplete="tel" placeholder="871 000 0000" />
+          <span>Número de celular *</span>
+          <input type="tel" id="f-telefono" autocomplete="tel" placeholder="871 000 0000" required />
         </label>
         <p class="field-error" id="step1-error" hidden>Completa tu nombre y celular para continuar.</p>
         <button class="btn-primary" id="to-step-2" type="button">Siguiente →</button>
@@ -334,6 +334,9 @@ import Layout from '../layouts/Layout.astro';
     .field input:focus {
       outline: none;
       border-color: var(--accent);
+    }
+    .field input.invalid {
+      border-color: #a3402c;
     }
     .field-error {
       font-family: 'Poppins', sans-serif;
@@ -634,6 +637,9 @@ import Layout from '../layouts/Layout.astro';
       document.querySelectorAll('.day-btn').forEach((b) => b.classList.remove('active'));
       if (slotsContainer) slotsContainer.innerHTML = '';
       selectedSlot = null;
+      (document.getElementById('f-nombre') as HTMLInputElement)?.classList.remove('invalid');
+      (document.getElementById('f-telefono') as HTMLInputElement)?.classList.remove('invalid');
+      hide('step1-error');
     });
     function closeModal() {
       backdrop?.setAttribute('hidden', '');
@@ -644,10 +650,30 @@ import Layout from '../layouts/Layout.astro';
       if (e.target === backdrop) closeModal();
     });
 
+    const nombreInput = document.getElementById('f-nombre') as HTMLInputElement;
+    const telefonoInput = document.getElementById('f-telefono') as HTMLInputElement;
+    const step1ErrorEl = document.getElementById('step1-error');
+
+    nombreInput?.addEventListener('input', () => nombreInput.classList.remove('invalid'));
+    telefonoInput?.addEventListener('input', () => telefonoInput.classList.remove('invalid'));
+
     document.getElementById('to-step-2')?.addEventListener('click', () => {
-      const nombre = (document.getElementById('f-nombre') as HTMLInputElement)?.value.trim();
-      const telefono = (document.getElementById('f-telefono') as HTMLInputElement)?.value.trim();
-      if (!nombre || !telefono) {
+      const nombre = nombreInput.value.trim();
+      const telefonoDigits = telefonoInput.value.replace(/\D/g, '');
+      const nombreValido = nombre.length >= 3;
+      const telefonoValido = telefonoDigits.length >= 10;
+
+      nombreInput.classList.toggle('invalid', !nombreValido);
+      telefonoInput.classList.toggle('invalid', !telefonoValido);
+
+      if (!nombreValido || !telefonoValido) {
+        if (step1ErrorEl) {
+          step1ErrorEl.textContent = !nombreValido && !telefonoValido
+            ? 'Escribe tu nombre completo y un celular válido a 10 dígitos.'
+            : !nombreValido
+            ? 'Escribe tu nombre completo.'
+            : 'Escribe un celular válido a 10 dígitos.';
+        }
         show('step1-error');
         return;
       }
