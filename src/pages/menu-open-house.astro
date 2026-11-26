@@ -96,7 +96,12 @@ const postres = [
           </a>
         </div>
         <a class="review-link" href="https://g.page/r/CRNfmAWG6xMGECE/review" target="_blank" rel="noopener">
-          Déjanos tu opinión ★
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="m12 2.6 2.74 6.24 6.79.62-5.13 4.51 1.54 6.63L12 17.02l-5.94 3.58 1.54-6.63-5.13-4.51 6.79-.62L12 2.6Z"
+            />
+          </svg>
+          Déjanos tu opinión
         </a>
       </div>
 
@@ -259,23 +264,24 @@ const postres = [
       transform: translateY(-2px);
     }
     .review-link {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       font-family: 'Poppins', sans-serif;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 0.95rem;
-      color: #20230f;
-      background: var(--accent-mid);
-      padding: 13px 28px;
-      border-radius: 100px;
-      box-shadow: 0 6px 0 0 var(--accent-strong);
-      transition: transform 0.15s ease;
+      color: var(--accent-mid);
+      border-bottom: 1.5px solid var(--accent-mid);
+      padding-bottom: 3px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .review-link svg {
+      width: 16px;
+      height: 16px;
     }
     .review-link:hover {
-      transform: translateY(-2px);
-    }
-    .review-link:active {
-      transform: translateY(3px);
-      box-shadow: 0 3px 0 0 var(--accent-strong);
+      color: #fff;
+      border-color: #fff;
     }
 
     /* ---------- Illustration ---------- */
