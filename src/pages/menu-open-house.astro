@@ -1,0 +1,210 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const bebidasCalientes = [
+  { nombre: 'Americano', caliente: 45, frio: 55 },
+  { nombre: 'Latte', caliente: 55, frio: 65 },
+  { nombre: 'Matcha', caliente: 60, frio: 70 },
+  { nombre: 'Chocolate', caliente: 55, frio: 65 },
+  { nombre: 'Tisana / té', caliente: 45, frio: 50 },
+];
+
+const bebidasFrias = [
+  { nombre: 'Agua Celis', precio: 25 },
+  { nombre: 'Jugo verde', precio: 50 },
+  { nombre: 'Jugo de naranja', precio: 45 },
+];
+
+const postres = [
+  { nombre: 'Rebanada de panqué', precio: 40 },
+  { nombre: 'Pastel', precio: 55 },
+  { nombre: 'Galleta', precio: 30 },
+];
+---
+
+<Layout
+  title="Menú Open House — Mimo Estudio & Barra"
+  description="Menú del Open House de Mimo Estudio & Barra, 27 y 28 de noviembre."
+>
+  <main class="menu-page">
+    <div class="menu-card">
+      <header class="menu-header">
+        <img class="menu-logo" src="/m-logo.png" alt="Mimo Estudio & Barra" />
+        <span class="menu-brand">mimo <em>estudio &amp; barra</em></span>
+      </header>
+
+      <div class="menu-title-block">
+        <h1>Menú</h1>
+        <p class="menu-tag">Open House</p>
+      </div>
+
+      <section class="menu-section">
+        <h2>Bebidas calientes y frías</h2>
+        <div class="menu-columns">
+          <span></span>
+          <span class="col-label">Caliente</span>
+          <span class="col-label">Frío</span>
+        </div>
+        {
+          bebidasCalientes.map((item) => (
+            <div class="menu-row two-col">
+              <span class="item-name">{item.nombre}</span>
+              <span class="item-price">{`$ ${item.caliente}`}</span>
+              <span class="item-price">{`$ ${item.frio}`}</span>
+            </div>
+          ))
+        }
+      </section>
+
+      <section class="menu-section">
+        <h2>Bebidas frías</h2>
+        {
+          bebidasFrias.map((item) => (
+            <div class="menu-row one-col">
+              <span class="item-name">{item.nombre}</span>
+              <span class="item-price">{`$ ${item.precio}`}</span>
+            </div>
+          ))
+        }
+      </section>
+
+      <section class="menu-section">
+        <h2>Postres</h2>
+        {
+          postres.map((item) => (
+            <div class="menu-row one-col">
+              <span class="item-name">{item.nombre}</span>
+              <span class="item-price">{`$ ${item.precio}`}</span>
+            </div>
+          ))
+        }
+      </section>
+
+      <footer class="menu-footer">
+        <p>¡Gracias por acompañarnos!</p>
+      </footer>
+    </div>
+  </main>
+
+  <style>
+    .menu-page {
+      min-height: 100svh;
+      width: 100%;
+      background: var(--paper);
+      display: flex;
+      justify-content: center;
+      padding: 0 0 48px;
+      border-top: 8px solid var(--accent);
+    }
+    .menu-card {
+      width: 100%;
+      max-width: 560px;
+      padding: 40px 28px 20px;
+      color: var(--ink);
+    }
+    .menu-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+    .menu-logo {
+      height: 34px;
+      width: auto;
+    }
+    .menu-brand {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 0.01em;
+    }
+    .menu-brand em {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 0.78rem;
+      display: block;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      opacity: 0.85;
+    }
+    .menu-title-block {
+      margin-bottom: 30px;
+    }
+    .menu-title-block h1 {
+      font-family: 'FreightMacro', Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(2.6rem, 10vw, 3.4rem);
+      color: var(--accent);
+      margin: 0;
+      line-height: 1;
+    }
+    .menu-tag {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      color: var(--accent-strong);
+      margin: 10px 0 0;
+    }
+    .menu-section {
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(60, 63, 39, 0.18);
+      padding-bottom: 14px;
+    }
+    .menu-section h2 {
+      font-family: 'FreightMacro', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--accent);
+      margin: 0 0 14px;
+    }
+    .menu-columns {
+      display: grid;
+      grid-template-columns: 1fr 70px 70px;
+      margin-bottom: 4px;
+    }
+    .col-label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--accent-strong);
+      text-align: right;
+    }
+    .menu-row {
+      display: grid;
+      align-items: baseline;
+      padding: 10px 0;
+      border-top: 1px solid rgba(60, 63, 39, 0.12);
+      font-family: 'Poppins', sans-serif;
+    }
+    .menu-row.two-col {
+      grid-template-columns: 1fr 70px 70px;
+    }
+    .menu-row.one-col {
+      grid-template-columns: 1fr auto;
+    }
+    .item-name {
+      font-weight: 400;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+    .item-price {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--ink);
+      text-align: right;
+    }
+    .menu-footer {
+      text-align: center;
+      padding-top: 12px;
+    }
+    .menu-footer p {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--accent-strong);
+      margin: 0;
+    }
+  </style>
+</Layout>
