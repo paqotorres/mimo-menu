@@ -35,13 +35,8 @@ const postres = [
       <p class="eyebrow">Open House</p>
       <h1 class="title">Menú</h1>
 
-      <nav class="tabs" id="menu-tabs">
-        <button class="tab-btn active" type="button" data-target="panel-calientes">Bebidas</button>
-        <button class="tab-btn" type="button" data-target="panel-frias">Frías</button>
-        <button class="tab-btn" type="button" data-target="panel-postres">Postres</button>
-      </nav>
-
-      <section class="menu-panel" id="panel-calientes">
+      <section class="menu-section">
+        <h2>Bebidas calientes y frías</h2>
         <div class="menu-columns">
           <span></span>
           <span class="col-label">Caliente</span>
@@ -58,7 +53,8 @@ const postres = [
         }
       </section>
 
-      <section class="menu-panel" id="panel-frias" hidden>
+      <section class="menu-section">
+        <h2>Bebidas frías</h2>
         {
           bebidasFrias.map((item) => (
             <div class="menu-row one-col">
@@ -69,7 +65,8 @@ const postres = [
         }
       </section>
 
-      <section class="menu-panel" id="panel-postres" hidden>
+      <section class="menu-section">
+        <h2>Postres</h2>
         {
           postres.map((item) => (
             <div class="menu-row one-col">
@@ -83,13 +80,27 @@ const postres = [
       <div class="social">
         <p class="social-title">Síguenos en nuestras redes</p>
         <div class="social-links">
-          <a href="https://www.facebook.com/mimoestudio.mx" target="_blank" rel="noopener">Facebook</a>
-          <a href="https://www.instagram.com/mimoestudio.mx" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.facebook.com/mimoestudio.mx" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.91h-2.33V22c4.78-.76 8.44-4.92 8.44-9.94Z"
+              />
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/mimoestudio.mx" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M12 2c2.72 0 3.06.01 4.12.06 1.07.05 1.79.22 2.43.47.66.26 1.21.6 1.77 1.15.5.5.9 1.1 1.15 1.77.25.64.42 1.36.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.07-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.36.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.07-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.36-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.07.22-1.79.47-2.43.26-.66.6-1.21 1.15-1.77A4.9 4.9 0 0 1 5.45.53c.64-.25 1.36-.42 2.43-.47C8.94.01 9.28 0 12 0Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.25A3.25 3.25 0 1 1 12 6.75a3.25 3.25 0 0 1 0 6.5ZM17.4 4.6a1.17 1.17 0 1 0 0 2.34 1.17 1.17 0 0 0 0-2.34Z"
+              />
+            </svg>
+          </a>
         </div>
         <a class="review-link" href="https://g.page/r/CRNfmAWG6xMGECE/review" target="_blank" rel="noopener">
           Déjanos tu opinión ★
         </a>
       </div>
+
+      <img class="wave-illustration" src="/char-wave-white.png" alt="Mimo saludando" loading="lazy" />
     </div>
   </main>
 
@@ -100,7 +111,7 @@ const postres = [
       display: flex;
       justify-content: center;
       overflow: hidden;
-      padding: 48px 24px 56px;
+      padding: 48px 24px 32px;
     }
     .bg {
       position: fixed;
@@ -150,53 +161,22 @@ const postres = [
       font-weight: 700;
       font-size: clamp(3rem, 14vw, 4.5rem);
       color: #fff;
-      margin: 0 0 24px;
+      margin: 0 0 36px;
       line-height: 0.95;
     }
 
-    /* ---------- Tabs ---------- */
-    .tabs {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 28px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .tab-btn {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 0.85rem;
-      color: var(--paper);
-      background: transparent;
-      border: 1px solid rgba(251, 249, 238, 0.35);
-      border-radius: 100px;
-      padding: 9px 20px;
-      transition: all 0.2s ease;
-    }
-    .tab-btn.active {
-      background: var(--accent-mid);
-      border-color: var(--accent-mid);
-      color: #20230f;
-    }
-    .tab-btn:not(.active):hover {
-      border-color: rgba(251, 249, 238, 0.7);
-    }
-
     /* ---------- Menu list (no cards, just hairline rows) ---------- */
-    .menu-panel {
+    .menu-section {
       width: 100%;
-      margin-bottom: 8px;
-      animation: fade-in 0.25s ease;
+      margin-bottom: 30px;
     }
-    @keyframes fade-in {
-      from {
-        opacity: 0;
-        transform: translateY(4px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .menu-section h2 {
+      font-family: 'FreightMacro', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--accent-mid);
+      text-align: left;
+      margin: 0 0 10px;
     }
     .menu-columns {
       display: grid;
@@ -241,7 +221,7 @@ const postres = [
 
     /* ---------- Social / review ---------- */
     .social {
-      margin-top: 36px;
+      margin-top: 6px;
       padding-top: 28px;
       border-top: 1px solid rgba(251, 249, 238, 0.18);
       width: 100%;
@@ -251,28 +231,32 @@ const postres = [
       font-weight: 600;
       font-size: 0.9rem;
       color: var(--accent-mid);
-      margin: 0 0 14px;
+      margin: 0 0 16px;
     }
     .social-links {
       display: flex;
-      gap: 12px;
+      gap: 18px;
       justify-content: center;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
+      margin-bottom: 22px;
     }
     .social-links a {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
       border: 1px solid rgba(251, 249, 238, 0.35);
-      border-radius: 100px;
-      padding: 10px 22px;
+      color: #fff;
       transition: all 0.2s ease;
+    }
+    .social-links svg {
+      width: 20px;
+      height: 20px;
     }
     .social-links a:hover {
       border-color: #fff;
-      transform: translateY(-1px);
+      transform: translateY(-2px);
     }
     .review-link {
       display: inline-block;
@@ -293,22 +277,13 @@ const postres = [
       transform: translateY(3px);
       box-shadow: 0 3px 0 0 var(--accent-strong);
     }
+
+    /* ---------- Illustration ---------- */
+    .wave-illustration {
+      width: 150px;
+      height: auto;
+      margin-top: 32px;
+      opacity: 0.95;
+    }
   </style>
-
-  <script>
-    const tabButtons = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
-    const panels = document.querySelectorAll<HTMLElement>('.menu-panel');
-
-    tabButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        tabButtons.forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const targetId = btn.dataset.target;
-        panels.forEach((panel) => {
-          panel.hidden = panel.id !== targetId;
-        });
-      });
-    });
-  </script>
 </Layout>
