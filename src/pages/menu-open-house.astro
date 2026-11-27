@@ -1,25 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const bebidasCalientes = [
-  { nombre: 'Americano', caliente: 45, frio: 55 },
-  { nombre: 'Latte', caliente: 55, frio: 65 },
-  { nombre: 'Matcha', caliente: 60, frio: 70 },
-  { nombre: 'Chocolate', caliente: 55, frio: 65 },
-  { nombre: 'Tisana / té', caliente: 45, frio: 50 },
-];
-
-const bebidasFrias = [
-  { nombre: 'Agua Celis', precio: 25 },
-  { nombre: 'Jugo verde', precio: 50 },
-  { nombre: 'Jugo de naranja', precio: 45 },
+const bebidas = [
+  { nombre: 'Americano', precio: 65 },
+  { nombre: 'Latte', precio: 75 },
+  { nombre: 'Matcha', precio: 58 },
+  { nombre: 'Tisana / Té', precio: 73 },
+  { nombre: 'Agua Celis', precio: 45 },
 ];
 
 const postres = [
-  { nombre: 'Rebanada de panqué', precio: 40 },
-  { nombre: 'Pastel', precio: 55 },
-  { nombre: 'Galleta', precio: 30 },
+  { nombre: 'Rebanada de panqué', precio: 65 },
+  { nombre: 'Pastel individual', precio: 110 },
+  { nombre: 'Galleta', precio: 45 },
 ];
+
+const metodosPago = ['Efectivo', 'Transferencia', 'Tarjeta'];
 ---
 
 <Layout
@@ -36,27 +32,9 @@ const postres = [
       <h1 class="title">Menú</h1>
 
       <section class="menu-section">
-        <h2>Bebidas calientes y frías</h2>
-        <div class="menu-columns">
-          <span></span>
-          <span class="col-label">Caliente</span>
-          <span class="col-label">Frío</span>
-        </div>
+        <h2>Bebidas</h2>
         {
-          bebidasCalientes.map((item) => (
-            <div class="menu-row two-col">
-              <span class="item-name">{item.nombre}</span>
-              <span class="item-price">{`$${item.caliente}`}</span>
-              <span class="item-price">{`$${item.frio}`}</span>
-            </div>
-          ))
-        }
-      </section>
-
-      <section class="menu-section">
-        <h2>Bebidas frías</h2>
-        {
-          bebidasFrias.map((item) => (
+          bebidas.map((item) => (
             <div class="menu-row one-col">
               <span class="item-name">{item.nombre}</span>
               <span class="item-price">{`$${item.precio}`}</span>
@@ -76,6 +54,11 @@ const postres = [
           ))
         }
       </section>
+
+      <div class="payment">
+        <p class="payment-title">Métodos de pago</p>
+        <p class="payment-options">{metodosPago.join(' · ')}</p>
+      </div>
 
       <div class="social">
         <p class="social-title">Síguenos en nuestras redes</p>
@@ -183,20 +166,6 @@ const postres = [
       text-align: left;
       margin: 0 0 10px;
     }
-    .menu-columns {
-      display: grid;
-      grid-template-columns: 1fr 64px 64px;
-      padding: 0 2px 6px;
-    }
-    .col-label {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 0.78rem;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      color: var(--accent-mid);
-      text-align: right;
-    }
     .menu-row {
       display: grid;
       align-items: baseline;
@@ -204,9 +173,6 @@ const postres = [
       border-bottom: 1px solid rgba(251, 249, 238, 0.14);
       font-family: 'Poppins', sans-serif;
       text-align: left;
-    }
-    .menu-row.two-col {
-      grid-template-columns: 1fr 64px 64px;
     }
     .menu-row.one-col {
       grid-template-columns: 1fr auto;
@@ -224,11 +190,34 @@ const postres = [
       font-variant-numeric: tabular-nums;
     }
 
+    /* ---------- Payment methods ---------- */
+    .payment {
+      width: 100%;
+      margin-top: 6px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(251, 249, 238, 0.18);
+      text-align: center;
+    }
+    .payment-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent-mid);
+      margin: 0 0 6px;
+    }
+    .payment-options {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--paper);
+      margin: 0;
+    }
+
     /* ---------- Social / review ---------- */
     .social {
-      margin-top: 6px;
-      padding-top: 28px;
-      border-top: 1px solid rgba(251, 249, 238, 0.18);
+      margin-top: 28px;
       width: 100%;
     }
     .social-title {
